@@ -15,13 +15,13 @@ function Tour({ tour, removeTour }) {
       <div>
         <h4>{name}</h4>
         <h5>${price}</h5>
-        <p>
+        <p id={`tour-item-para-${id}`}>
           {showInfo ? info : `${info.substring(0, 200)}...`}
           <button onClick={toggleInfo}>
             {showInfo ? 'Show less' : 'Show more'}
           </button>
         </p>
-        <button onClick={() => removeTour(id)}>Not Interested</button>
+        <button id={`delete-btn-${id}`} onClick={() => removeTour(id)}>Not Interested</button>
       </div>
     </article>
   );
