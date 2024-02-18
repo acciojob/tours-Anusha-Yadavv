@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 
 function Tour({ tour, removeTour }) {
-  const [showAllInfo, setShowAllInfo] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   const { id, name, info, image, price } = tour;
 
   const toggleInfo = () => {
-    setShowAllInfo(!showAllInfo);
+    setShowInfo(!showInfo);
   };
-
-  const displayInfo = showAllInfo ? info : info.split(' ').slice(0, 200).join(' ') + '...';
 
   return (
     <article className="tour">
@@ -17,11 +15,13 @@ function Tour({ tour, removeTour }) {
       <div>
         <h4>{name}</h4>
         <h5>${price}</h5>
-        <p>{displayInfo}</p>
-        <button onClick={toggleInfo}>
-          {showAllInfo ? 'Show less' : 'Read more'}
-        </button>
-        <button onClick={() => removeTour(id)}>Not Interested</button>
+        <p id={`tour-item-para-${id}`}>
+          {showInfo ? info : `${info.substring(0, 200)}...`}
+          <button id={`see-more-${id}`} onClick={toggleInfo}>
+            {showInfo ? 'Show less' : 'Show more'}
+          </button>
+        </p>
+        <button id={`delete-btn-${id}`} onClick={() => removeTour(id)}>Not Interested</button>
       </div>
     </article>
   );
